@@ -1,0 +1,181 @@
+{
+  "network": {
+    "domainName": "google.com",
+    "hostname": "endpoint1",
+    "interfaces": [
+      {
+        "id": "eth0",
+        "name": "ethernet0",
+        "protocols": [
+          {
+            "type": "ipv4",
+            "autoDNSServer": false,
+            "DHCPEnabled": true,
+            "protocolEnabled": true,
+            "DNSServers": [
+              "123.9.0.111",
+              "123.9.0.112"
+            ],
+            "addresses": [
+              {
+                "ipAddress": "191.168.0.113",
+                "subnetMask": "255.255.0.0"
+              },
+              {
+                "ipAddress": "191.168.0.114",
+                "subnetMask": "255.255.0.0"
+              }
+            ],
+            "gateway": "191.1.0.115"
+          },
+		  {
+            "type": "ipv6",
+            "autoDNSServer": false,
+            "DHCPEnabled": true,
+            "protocolEnabled": true,
+            "DNSServers": [
+              "2001:db8:3333:4444:5555:6666:7777:1111",
+              "2001:db8:3333:4444:5555:6666:7777:1112"
+            ],
+            "addresses": [
+              {
+                "ipAddress": "2001:db8:3333:4444:5555:6666:7777:1113",
+                "prefix": 255
+              },
+              {
+                "ipAddress": "2001:db8:3333:4444:5555:6666:7777:1114",
+                "prefix": 255
+              }
+            ],
+            "gateway": "2001:db8:3333:4444:5555:6666:7777:1115"
+          }
+        ],
+        "security": {
+          "net8021x": {
+            "config": {
+              "type": "tls",
+              "identity": "TLSIdentity",
+              "CACertificate": "caCertificateId",
+              "clientCertificate": "clientCertificateId"
+            }
+          }
+        }
+      },
+	  {
+        "id": "eth0",
+        "name": "ethernet0",
+        "protocols": [
+          {
+            "type": "ipv4",
+            "autoDNSServer": false,
+            "DHCPEnabled": true,
+            "protocolEnabled": true,
+            "DNSServers": [
+              "123.9.0.111",
+              "123.9.0.112"
+            ],
+            "addresses": [
+              {
+                "ipAddress": "191.168.0.113",
+                "subnetMask": "255.255.0.0"
+              },
+              {
+                "ipAddress": "191.168.0.114",
+                "subnetMask": "255.255.0.0"
+              }
+            ],
+            "gateway": "191.1.0.115"
+          },
+		  {
+            "type": "ipv6",
+            "autoDNSServer": false,
+            "DHCPEnabled": true,
+            "protocolEnabled": true,
+            "DNSServers": [
+              "2001:db8:3333:4444:5555:6666:7777:1111",
+              "2001:db8:3333:4444:5555:6666:7777:1112"
+            ],
+            "addresses": [
+              {
+                "ipAddress": "2001:db8:3333:4444:5555:6666:7777:1113",
+                "prefix": 255
+              },
+              {
+                "ipAddress": "2001:db8:3333:4444:5555:6666:7777:1114",
+                "prefix": 255
+              }
+            ],
+            "gateway": "2001:db8:3333:4444:5555:6666:7777:1115"
+          }
+        ],
+        "security": {
+          "net8021x": {
+            "config": {
+              "type": "tls",
+              "identity": "TLSIdentity",
+              "CACertificate": "caCertificateId",
+              "clientCertificate": "clientCertificateId"
+            }
+          }
+        }
+      }{
+        "id": "eth1",
+        "name": "ethernet1",
+        "protocols": [
+          {
+            "type": "ipv4",
+            "autoDNSServer": false,
+            "DHCPEnabled": true,
+            "protocolEnabled": true,
+            "DNSServers": [
+              "123.9.0.221",
+              "123.9.0.222"
+            ],
+            "addresses": [
+              {
+                "ipAddress": "191.168.0.223",
+                "subnetMask": "255.255.0.0"
+              },
+              {
+                "ipAddress": "191.168.0.224",
+                "subnetMask": "255.255.0.0"
+              }
+            ],
+            "gateway": "191.1.0.225"
+          },
+		  {
+            "type": "ipv6",
+            "autoDNSServer": false,
+            "DHCPEnabled": true,
+            "protocolEnabled": true,
+            "DNSServers": [
+              "2001:db8:3333:4444:5555:6666:7777:1111",
+              "2001:db8:3333:4444:5555:6666:7777:1112"
+            ],
+            "addresses": [
+              {
+                "ipAddress": "2001:db8:3333:4444:5555:6666:7777:1113",
+                "prefix": 255
+              },
+              {
+                "ipAddress": "2001:db8:3333:4444:5555:6666:7777:1114",
+                "prefix": 255
+              }
+            ],
+            "gateway": "2001:db8:3333:4444:5555:6666:7777:1115"
+          }
+        ],
+        "security": {
+          "net8021x": {
+            "config": {
+              "type": "tls",
+              "identity": "TLSIdentity",
+              "CACertificate": "caCertificateId",
+              "clientCertificate": "clientCertificateId"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

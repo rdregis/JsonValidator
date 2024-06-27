@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <LOCAL_HOME>C:\Development</LOCAL_HOME>
+    <SPDLOG_INCLUDE>$(LOCAL_HOME)\SPDLogger\Include</SPDLOG_INCLUDE>
+    <JSONCPP_INCLUDE>$(LOCAL_HOME)\jsoncpp\Include</JSONCPP_INCLUDE>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="LOCAL_HOME">
+      <Value>$(LOCAL_HOME)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SPDLOG_INCLUDE">
+      <Value>$(SPDLOG_INCLUDE)</Value>
+    </BuildMacro>
+    <BuildMacro Include="JSONCPP_INCLUDE">
+      <Value>$(JSONCPP_INCLUDE)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

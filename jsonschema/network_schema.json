@@ -1,0 +1,306 @@
+{
+    "predicate": [
+        {
+            "name": "stringRequired",
+            "scope": {
+                "type": "string",
+                "required": true,
+                "domain": [
+                    {
+                        "validate": "[a-z  A-Z  0-9  -  _  .]+"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "booleanRequired",
+            "scope": {
+                "type": "boolean",
+                "required": true,
+                "domain": [
+                    {
+                        "pattern": "up|down",
+                        "values": [
+                            "true",
+                            "false"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "IPAddress",
+            "scope": {
+                "type": "string",
+                "required": true,
+                "domain": [
+                    {
+                        "dependencies": [
+                            {
+                                "type": "ipv4"
+                            }
+                        ],
+                        "pattern": "(^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$)"
+                    },
+                    {
+                        "dependencies": [
+                            {
+                                "type": "ipv6"
+                            }
+                        ],
+                        "pattern": "(^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$)"
+                    }
+                ]
+            }
+        }
+    ],
+    "schema": {
+        "network": {
+            "type": "object",
+            "description": "The network configuration",
+            "required": true,
+            "properties": {
+                "domainName": {
+                    "type": "string",
+                    "domain": [
+                        {
+                            "dependencies": [
+                                {
+                                    "type": "ipv4"
+                                }
+                            ],
+                            "pattern": "[a-z   0-9  -  _  .]+"
+                        },
+                        {
+                            "pattern": "[A-Z  0-9  -  _  .]+"
+                        }
+                    ],
+                    "required": true
+                },
+				"fostnamexxx": {
+                    "type": "string",
+					"required": true,
+					"domain": [
+						{
+							"validate": "[a-z  A-Z  0-9  -  _  .]+"
+						}
+					]
+                },
+                "hostname": {
+                    "predicate": "stringRequired"
+                },
+                "interfaces": {
+                    "type": "array",
+                    "items": {
+                        "id": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "linkLayer": {
+                            "type": "object",
+                            "required": false,
+                            "properties": {
+                                "connectionState": {
+                                    "type": "string",
+                                    "required": true,
+                                    "domain": [
+                                        {
+                                            "pattern": "[a-z}+",
+                                            "enum": [
+                                                "up",
+                                                "down"
+                                            ]
+                                        }
+                                    ],
+                                    "description": "The state of the link layer connection"
+                                },
+                                "interfaceFlags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "required": true,
+                                        "domain": [
+                                            {
+                                                "enum": [
+                                                    "up",
+                                                    "down",
+                                                    "broadcast",
+                                                    "multicast",
+                                                    "loopback",
+                                                    "multicast",
+                                                    "echo"
+                                                ]
+                                            }
+                                        ],
+                                        "description": "The flags of the interface"
+                                    }
+                                },
+                                "macAddress": {
+                                    "type": "string",
+                                    "required": true,
+                                    "domain": [
+                                        {
+                                            "pattern": "???"
+                                        }
+                                    ],
+                                    "description": "The MAC address of the interface"
+                                },
+                                "mtu": {
+                                    "type": "integer",
+                                    "required": true,
+                                    "description": "The maximum transmission unit of the interface"
+                                },
+                                "speed": {
+                                    "type": "integer",
+                                    "required": true,
+                                    "description": "The speed of the interface"
+                                }
+                            }
+                        },
+                        "name": {
+                            "predicate": "stringRequired"
+                        },
+                        "protocols": {
+                            "type": "array",
+                            "minItems": 1,
+                            "description": "The protocols of the interface",
+                            "items": {
+                                "AutoDNSServer": {
+                                    "predicate": "booleanRequired",
+                                    "description": "The auto DNS server of the interface"
+                                },
+                                "DHCPEnabled": {
+                                    "predicate": "booleanRequired",
+                                    "description": "The DHCP enabled of the interface"
+                                },
+                                "DNSServer": {
+                                    "type": "array",
+                                    "dependencies": [
+                                        {
+                                            "type": "ipv4"
+                                        }
+                                    ],
+                                    "items": {
+                                        "type": "string",
+                                        "required": true,
+                                        "predicate": "IPAddress",
+                                        "description": "The DNS server of the interface"
+                                    }
+                                },
+                                "addresses": {
+                                    "type": "array",
+                                    "required": true,
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "ipAddress": {
+                                                "type": "string",
+                                                "required": true,
+                                                "predicate": "IPAddress",
+                                                "description": "The address of the interface"
+                                            },
+                                            "subnetMask": {
+                                                "type": "string",
+                                                "dependencies": [
+                                                    {
+                                                        "type": "ipv4"
+                                                    }
+                                                ],
+                                                "required": true,
+                                                "predicate": "IPAddress",
+                                                "description": "The netmask of the interface"
+                                            },
+                                            "prefix": {
+                                                "type": "integer",
+                                                "required": true,
+                                                "dependencies": [
+                                                    {
+                                                        "type": "ipv6"
+                                                    }
+                                                ],
+                                                "domain": [
+                                                    {
+                                                        "pattern": "0-128"
+                                                    }
+                                                ],
+                                                "description": "The prefix of the interface"
+                                            }
+                                        }
+                                    }
+                                },
+                                "enabled": {
+                                    "predicate": "booleanRequired",
+                                    "description": "The enabled of the interface"
+                                },
+                                "gateway": {
+                                    "type": "string",
+                                    "required": true,
+                                    "predicate": "IPAddress",
+                                    "description": "The gateway of the interface"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "required": true,
+                                    "domain": [
+                                        {
+                                            "values": [
+                                                "ipv4"
+                                            ],
+                                            "pattern": "ipv4"
+                                        },
+                                        {
+                                            "values": [
+                                                "ipv6"
+                                            ],
+                                            "pattern": "ipv6"
+                                        }
+                                    ],
+                                    "description": "The type of the interface"
+                                }
+                            }
+                        },
+                        "security": {
+                            "type": "object",
+                            "required": false,
+                            "properties": {
+                                "net8021x": {
+                                    "type": "object",
+                                    "required": true,
+                                    "properties": {
+                                        "CACertificate": {
+                                            "type": "string",
+                                            "required": true,
+                                            "description": "The CA certificate of the interface"
+                                        },
+                                        "clientCertificate": {
+                                            "type": "string",
+                                            "required": true,
+                                            "description": "The client certificate of the interface"
+                                        },
+                                        "identity": {
+                                            "type": "string",
+                                            "required": true,
+                                            "description": "The identity of the interface"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "required": true,
+                                            "domain": [
+                                                {
+                                                    "values": [
+                                                        "tls"
+                                                    ]
+                                                }
+                                            ],
+                                            "description": "The type of the interface"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
